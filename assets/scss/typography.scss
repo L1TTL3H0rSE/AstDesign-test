@@ -1,0 +1,68 @@
+
+.h {
+    &-1 {
+        font-family: Inter;
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+    &-2 {
+        font-family: Inter;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0%;        
+    }
+    &-3 {
+        font-family: Inter;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;  
+    }
+}
+
+.p {
+    &-m {
+        font-family: Golos Text;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+    &-sale {
+        font-family: Golos Text;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+    &-price {
+        font-family: Golos Text;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+    &-discount {
+        font-family: Inter;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0%;
+    }
+}
+
+.decoration {
+    &-through {
+        text-decoration: line-through;
+    }
+    &-underline {
+        text-decoration: underline;
+        // text-decoration-style: solid;
+        // text-decoration-offset: 0%;
+        // text-decoration-thickness: 0%;
+        // text-decoration-skip-ink: auto;
+    }
+}
