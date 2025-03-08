@@ -20,9 +20,9 @@ const basketText = computed(() => {
 
 <template>
     <div class="header">
-        <h1 class="h-1">
+        <NuxtLink to="/" class="h-1">
             Brand Name
-        </h1>
+        </NuxtLink to="/">
         <div class="header__basket">
             <IconsBasket />
             <p class="p-m">{{ `${basket} ${basketText}` }}</p>
@@ -40,13 +40,19 @@ const basketText = computed(() => {
     width: 100%;
     padding: 0 40px;
     box-sizing: border-box;
+
+    > a {
+        text-decoration: none;
+        &.router-link-active,
+        &:visited {
+            color: var(--text-dark-color);
+        }
+    }
+
     &__basket {
         display: flex;
         gap: 10px;
         align-items: center;
-        > p {
-            margin: 0;
-        }
         > svg {
             width: 32px;
             height: 32px;

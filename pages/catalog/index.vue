@@ -1,6 +1,6 @@
 <template>
     <div class="landing">
-        <NuxtLink to="/catalog" class="h-1">Перейти в раздел каталога</NuxtLink to="/catalog">
+        aboba
     </div>
 </template>
 
@@ -14,10 +14,10 @@
     align-items: center;
     justify-content: center;
     flex: 1;
-    > a {
+    > h1 {
         color: var(--text-sale-color);
         text-decoration: underline;
-        font-weight: 500;
+        text-decoration: none;
         &:visited {
             color: var(--text-sale-color);
         }

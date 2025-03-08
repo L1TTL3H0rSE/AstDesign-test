@@ -43,6 +43,8 @@ body {
     &__content {
         max-width: 1440px;
         margin: 0 auto;
+        flex: 1;
+        display: flex;
     }
     &__popups {
         position: absolute
