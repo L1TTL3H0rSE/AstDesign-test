@@ -1,6 +1,6 @@
 <template>
     <div class="landing">
-        aboba
+        <Item id="1" />
     </div>
 </template>
 

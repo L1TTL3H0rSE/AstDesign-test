@@ -26,7 +26,6 @@
     box-sizing: border-box;
     h1, p, a {
         color: var(--text-light-color);
-        ;
     }
     a {
        text-decoration: underline; 
