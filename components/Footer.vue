@@ -3,13 +3,15 @@
 </script>
 
 <template>
-    <div class="footer">
-        <h1 class="h-1">
-            Brand Name
-        </h1>
-        <div class="footer__link">
-            <p class="p-m">Разработчик</p>
-            <NuxtLink class="p-m" to="aboba">Тельпуховский Николай</NuxtLink>
+    <div class="footer__wrapper">
+        <div class="footer">
+            <h1 class="h-1">
+                Brand Name
+            </h1>
+            <div class="footer__link">
+                <p class="p-m">Разработчик</p>
+                <NuxtLink class="p-m" to="aboba">Тельпуховский Николай</NuxtLink>
+            </div>
         </div>
     </div>
 </template>
@@ -20,8 +22,8 @@
     align-items: center;
     justify-content: space-between;
     height: 92px;
-    background: var(--background-dark-color);
-    width: 100%;
+    flex: 1;
+    max-width: 1440px;
     padding: 0 40px;
     box-sizing: border-box;
     h1, p, a {
@@ -32,6 +34,13 @@
        &:visited {
             color: var(--text-light-color);
         }
+    }
+
+    &__wrapper {
+        background: var(--background-dark-color);
+        display: flex;
+        justify-content: center;
+        width: 100%;
     }
 }
 </style>

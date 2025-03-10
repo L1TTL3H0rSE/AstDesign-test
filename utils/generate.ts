@@ -1,25 +1,22 @@
 import { faker } from '@faker-js/faker';
 
-interface Product {
+export interface Product {
     image: string;
-    newPrice: number;
+    price: number;
     oldPrice?: number;
     brand: string;
-    name: string;
-    url: string;
+    title: string;
 }
 
 export const generateFakeProduct = (): Product => {
     const hasOldPrice = faker.datatype.boolean();
-    const newPrice = faker.commerce.price({min: 100, max: 100000});
-    const oldPrice = hasOldPrice ? newPrice + faker.commerce.price({min: 10, max: 10000}) : undefined;
-
+    const price = Number(faker.commerce.price({min: 10, max: 10000}));
+    const oldPrice = hasOldPrice ? price + Number(faker.commerce.price({min: 10, max: 10000})) : undefined;
     return {
         image: faker.image.url(),
-        newPrice: Number(newPrice),
-        oldPrice: oldPrice ? Number(oldPrice) : undefined,
+        price: Number(price),
+        oldPrice: oldPrice ? Number(Number(oldPrice).toFixed(2)) : undefined,
         brand: faker.company.name(),
-        name: faker.commerce.productName(),
-        url: path.products + '/' + faker.number.int({min: 10, max:10000}),
+        title: faker.commerce.productName(),
     };
 };

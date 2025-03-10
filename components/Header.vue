@@ -2,11 +2,11 @@
 import { useBasketStore } from '~/store/basket';
 import { IconsBasket } from '#components';
 
-const { basket } = useBasketStore();
+const { basket } = storeToRefs(useBasketStore());
 
 const basketText = computed(() => {
-    const mod10 = basket % 10;
-    const mod100 = basket % 100;
+    const mod10 = basket.value % 10;
+    const mod100 = basket.value % 100;
 
     if (mod10 == 1 && mod100 != 11) {
         return "товар";
@@ -19,13 +19,15 @@ const basketText = computed(() => {
 </script>
 
 <template>
-    <div class="header">
-        <NuxtLink to="/" class="h-1">
-            Brand Name
-        </NuxtLink to="/">
-        <div class="header__basket">
-            <IconsBasket />
-            <p class="p-m">{{ `${basket} ${basketText}` }}</p>
+    <div class="header__wrapper">
+        <div class="header">
+            <NuxtLink to="/" class="h-1">
+                Brand Name
+            </NuxtLink to="/">
+            <div class="header__basket">
+                <IconsBasket />
+                <p class="p-m">{{ `${basket} ${basketText}` }}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -36,10 +38,10 @@ const basketText = computed(() => {
     align-items: center;
     justify-content: space-between;
     height: 92px;
-    box-shadow: 0px 10px 40px 0px #0000001A;
-    width: 100%;
+    flex: 1;
     padding: 0 40px;
     box-sizing: border-box;
+    max-width: 1440px;
 
     > a {
         text-decoration: none;
@@ -59,6 +61,12 @@ const basketText = computed(() => {
             flex-shrink: 0;
             color: black;
         }
+    }
+
+    &__wrapper {
+        box-shadow: 0px 10px 40px 0px #0000001A;
+        display: flex;
+        justify-content: center;
     }
 }
 </style>

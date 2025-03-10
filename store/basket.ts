@@ -1,9 +1,9 @@
 export const useBasketStore = defineStore("basket", () => {
     const basket = ref(0);
 
-    function basketAdd() {
+    function addBasket() {
         basket.value++;
     }
 
-    return { basket, basketAdd }
+    return { basket, addBasket }
 })

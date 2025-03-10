@@ -1,26 +1,40 @@
+<script setup lang="ts">
+import { useItemsStore } from '~/store/items';
+
+const { items } = storeToRefs(useItemsStore());
+</script>
+
 <template>
-    <div class="landing">
-        <Item id="1" />
+    <div class="catalog">
+        <h1 class="h-1">
+            Тестовая задача
+        </h1>
+        <div class="catalog__items">
+            <template v-for="i in items">
+                <div class="catalog__wrapper">
+                    <Item :id="String(Math.random())" v-bind="i"/>
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
-
 <style lang="scss">
-.landing {
+.catalog {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    > h1 {
-        color: var(--text-sale-color);
-        text-decoration: underline;
-        text-decoration: none;
-        &:visited {
-            color: var(--text-sale-color);
-        }
+    padding: 32px 40px;
+    flex-direction: column;
+    gap: 24px;
+    &__items {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    &__wrapper {
+        width: 200px;
+        height: 284px;
+        overflow: visible;
     }
 }
 </style>

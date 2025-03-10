@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useBasketStore } from '~/store/basket';
+import { useItemsStore } from '~/store/items';
+import { usePopupsStore } from '~/store/popups';
 
 type ItemProps = {
     id: string;
@@ -6,40 +9,52 @@ type ItemProps = {
     brand?: string;
     image?: string;
     price?: number;
-    discount?: number;
+    oldPrice?: number;
 }
 
 const props = withDefaults(defineProps<ItemProps>(), {
     id: String(Math.random()),
     title: "Цветные наклейки на клавиши пианино, один два три четыре пять",
     brand: "TERRIS",
-    discount: 1288,
-    price: 1610,
     image: "https://s3-alpha-sig.figma.com/img/51cd/c3d2/1edbd228223c006e9601511006945b10?Expires=1742169600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=OJg88~y6-zag1088-EqOQMi3fRSZwv1ckUham~AEbmaqS1-s5aiwVPNNfudAi6e8stWH51AZXyMzuEp2NTPXeNEXEwOHnjnWElodIo8AP8Bo13k8tMIqy5fY~-NRzFalyXUbxko9EzlQB0WktzuuXf-qBsrn~ybehnwtB78usm6UdlzCQ2qShiZNCE3S-qo4FwWX2Gvepu~pNOo5sYRw0rn8VeIbyxVEOhCb9vNTlCTv7akHa7HXC5tt9v7YvNlpCJb0h8NLgr75iVMVEP6K~17ClFJnykr1NUCTyrASmp5zjM~8UaCMbFwBH0Zc9uiSk9nlbGFmo1XBS~WW2rFZUg__",
-})
+});
 
 
-const percentage = computed(() => Math.ceil((1 - props.discount / props.price) * 100))
+const percentage = computed(() => props.oldPrice && props.price ? Math.ceil((1 - props.price / props.oldPrice) * 100) : undefined);
+
+const { addBasket } = useBasketStore();
+const { addPopup } = usePopupsStore();
+
+function add() {
+    addBasket();
+    addPopup();
+}
 </script>
 
 <template>
     <div class="item">
         <div class="item__image" :style="{ '--image': `url(${props.image})`}">
-            <span class="p-discount">
-                {{ `-${percentage}%` }}
+            <span class="p-discount" v-if="percentage">
+                {{ `${percentage}%` }}
             </span>
         </div>
         <div class="item__content">
             <div class="item__price">
-                <p class="p-price">
-                    {{ props.discount }}
-                </p>
-                <p class="p-sale">
-                    {{ props.price }}
-                </p>
+                <template v-if="oldPrice">
+                    <p class="p-price">
+                        {{ props.price }}
+                    </p>
+                    <p class="p-sale">
+                        {{ props.oldPrice }}
+                    </p>
+                </template>
+                <template v-else>
+                    <p class="p-price">
+                        {{ props.price }}
+                    </p>
+                </template>
             </div>
             <div class="item__brand">
-                <!-- По идее тут должна быть картинка, а не текст -->
                 <p class="p-brand">
                     {{ props.brand }}
                 </p>
@@ -50,6 +65,11 @@ const percentage = computed(() => Math.ceil((1 - props.discount / props.price) *
                 </p>
             </div>
         </div>
+        <div class="item__button" @click="add">
+            <p class="p-m">
+                В корзину
+            </p>
+        </div>
     </div>
 </template>
 
@@ -57,8 +77,8 @@ const percentage = computed(() => Math.ceil((1 - props.discount / props.price) *
 .item {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 12px;
-    max-width: 200px;
     &__image {
         width: 200px;
         height: 200px;
@@ -94,6 +114,43 @@ const percentage = computed(() => Math.ceil((1 - props.discount / props.price) *
         > .p-sale {
             text-decoration: line-through;
             color: var(--text-secondary-color);
+        }
+    }
+    &__title {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word;
+        text-overflow: ellipsis;
+    }
+    &__button {
+        display: none;
+        width: 120px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: var(--background-dark-color);
+        cursor: pointer;
+        > p {
+            color: var(--text-light-color);
+        }
+    }
+    &:hover {
+        position: relative;
+        z-index: 2;
+        box-shadow: 0px 10px 40px 0px #0000001A;
+        width: 250px;
+        height: 384px;
+        padding: 24px;
+        box-sizing: border-box;
+        transform: translate(-24px, -24px);
+        background: var(--background-color);
+        border-radius: 16px;
+        .item__button {
+            display: flex;
         }
     }
 }

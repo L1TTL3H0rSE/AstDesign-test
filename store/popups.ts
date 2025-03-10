@@ -9,7 +9,7 @@ export const usePopupsStore = defineStore("popups", () => {
     function popupRemoval() {
         setTimeout(() => {
             popup.value = false;
-        }, 5_000)
+        }, 1_000)
     }
 
     return {
