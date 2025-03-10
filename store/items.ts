@@ -3,7 +3,7 @@ export const useItemsStore = defineStore("items", () => {
 
     function init() {
         const localItems = Array.from({ length: 12 }, () =>
-            generateFakeProduct()
+            generateFakeProduct(String(Math.random()))
         )
         items.value = localItems;
     }

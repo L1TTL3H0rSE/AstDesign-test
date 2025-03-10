@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { routerKey } from 'vue-router';
 import { useBasketStore } from '~/store/basket';
 import { useItemsStore } from '~/store/items';
 import { usePopupsStore } from '~/store/popups';
@@ -10,6 +11,7 @@ type ItemProps = {
     image?: string;
     price?: number;
     oldPrice?: number;
+    hover?: boolean;
 }
 
 const props = withDefaults(defineProps<ItemProps>(), {
@@ -22,6 +24,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
 
 const percentage = computed(() => props.oldPrice && props.price ? Math.ceil((1 - props.price / props.oldPrice) * 100) : undefined);
 
+const router = useRouter();
 const { addBasket } = useBasketStore();
 const { addPopup } = usePopupsStore();
 
@@ -32,8 +35,8 @@ function add() {
 </script>
 
 <template>
-    <div class="item">
-        <div class="item__image" :style="{ '--image': `url(${props.image})`}">
+    <div class="item" :class="{ 'hover': props.hover }">
+        <div class="item__image" :style="{ '--image': `url(${props.image})`}" @click="router.push(`/products/${props.id}`)">
             <span class="p-discount" v-if="percentage">
                 {{ `${percentage}%` }}
             </span>
@@ -138,7 +141,8 @@ function add() {
             color: var(--text-light-color);
         }
     }
-    &:hover {
+    &:hover,
+    &.hover {
         position: relative;
         z-index: 2;
         box-shadow: 0px 10px 40px 0px #0000001A;

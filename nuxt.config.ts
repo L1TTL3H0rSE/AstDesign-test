@@ -26,4 +26,10 @@ export default defineNuxtConfig({
       Roboto: [400, 500, 600, 700],
     },
   },
+  nitro: {
+    compressPublicAssets: true,
+    routeRules: {
+      '/api/**': { swr: 600 },
+    }
+  }
 })

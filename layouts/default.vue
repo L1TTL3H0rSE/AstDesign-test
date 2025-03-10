@@ -3,9 +3,6 @@ import { useItemsStore } from '~/store/items';
 import { usePopupsStore } from '~/store/popups';
 
 const { popup } = storeToRefs(usePopupsStore());
-const { init } = useItemsStore();
-
-onMounted(() => init());
 </script>
 
 <template>

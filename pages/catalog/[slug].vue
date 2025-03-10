@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useItemsStore } from '~/store/items';
 
-const { items } = storeToRefs(useItemsStore());
+const route = useRoute();
+const { data: items } = await useFetch(`/api/catalog/${route.params.slug}`);
 </script>
 
 <template>
@@ -9,10 +10,10 @@ const { items } = storeToRefs(useItemsStore());
         <h1 class="h-1">
             Тестовая задача
         </h1>
-        <div class="catalog__items">
-            <template v-for="i in items">
+        <div class="catalog__items" v-if="items">
+            <template v-for="i in items.products">
                 <div class="catalog__wrapper">
-                    <Item :id="String(Math.random())" v-bind="i"/>
+                    <Item v-bind="i"/>
                 </div>
             </template>
         </div>
