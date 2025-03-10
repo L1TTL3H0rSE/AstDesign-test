@@ -16,6 +16,7 @@
     width: 233px;
     height: 65px;
     border-radius: 16px;
+    gap: 3px;
 
     p, span {
         color: var(--text-light-color);
