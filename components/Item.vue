@@ -38,22 +38,22 @@ function add() {
     <div class="item" :class="{ 'hover': props.hover }">
         <div class="item__image" :style="{ '--image': `url(${props.image})`}" @click="router.push(`/products/${props.id}`)">
             <span class="p-discount" v-if="percentage">
-                {{ `${percentage}%` }}
+                {{ `-${percentage}%` }}
             </span>
         </div>
         <div class="item__content">
             <div class="item__price">
                 <template v-if="oldPrice">
                     <p class="p-price">
-                        {{ props.price }}
+                        {{ `${props.price} ₽` }}
                     </p>
                     <p class="p-sale">
-                        {{ props.oldPrice }}
+                        {{ `${props.oldPrice} ₽` }}
                     </p>
                 </template>
                 <template v-else>
                     <p class="p-price">
-                        {{ props.price }}
+                        {{ `${props.price} ₽` }}
                     </p>
                 </template>
             </div>
@@ -104,6 +104,15 @@ function add() {
             color: var(--text-sale-color);
         }
     }
+    &__brand {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word;
+        text-overflow: ellipsis;
+    }
     &__content {
         display: flex;
         flex-direction: column;
@@ -147,7 +156,6 @@ function add() {
         z-index: 2;
         box-shadow: 0px 10px 40px 0px #0000001A;
         width: 250px;
-        height: 384px;
         padding: 24px;
         box-sizing: border-box;
         transform: translate(-24px, -24px);

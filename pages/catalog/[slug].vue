@@ -11,6 +11,9 @@ const { data: items } = await useFetch(`/api/catalog/${route.params.slug}`);
             Тестовая задача
         </h1>
         <div class="catalog__items" v-if="items">
+            <div class="catalog__wrapper">
+                <Item v-bind="{ price: 1288, oldPrice: 1610, id: '12' }"/>
+            </div>
             <template v-for="i in items.products">
                 <div class="catalog__wrapper">
                     <Item v-bind="i"/>

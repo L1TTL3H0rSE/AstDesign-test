@@ -17,8 +17,8 @@ export const generateFakeProduct = (id: string): Product => {
     return {
         id: id,
         image: faker.image.url(),
-        price: Number(price),
-        oldPrice: oldPrice ? Number(Number(oldPrice).toFixed(2)) : undefined,
+        price: Math.ceil(price),
+        oldPrice: oldPrice ? Math.ceil(oldPrice) : undefined,
         brand: faker.company.name(),
         title: faker.commerce.productName(),
     };

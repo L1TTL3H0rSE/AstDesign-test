@@ -10,7 +10,7 @@
             </h1>
             <div class="footer__link">
                 <p class="p-m">Разработчик</p>
-                <NuxtLink class="p-m" to="aboba">Тельпуховский Николай</NuxtLink>
+                <NuxtLink class="p-m" to="https://hh.ru/resume/52444072ff0d04dfb90039ed1f707a3756516d">Тельпуховский Николай</NuxtLink>
             </div>
         </div>
     </div>
